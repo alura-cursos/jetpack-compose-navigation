@@ -3,7 +3,6 @@ package br.com.alura.panucci
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.sampledata.bottomAppBarItems
-import br.com.alura.panucci.sampledata.sampleProductWithImage
-import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.screens.*
@@ -30,15 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             Log.i("MainActivity", "onCreate: navController $navController")
-            val initialScreen = "Destaques"
-            val screens = remember {
-                mutableStateListOf(initialScreen)
-            }
-            Log.i("MainActivity", "onCreate: screens ${screens.toList()}")
-            val currentScreen = screens.last()
-            BackHandler(screens.size > 1) {
-                screens.removeLast()
-            }
+            val currentScreen = ""
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -52,32 +41,10 @@ class MainActivity : ComponentActivity() {
                         bottomAppBarItemSelected = selectedItem ?: bottomAppBarItems.first(),
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
-                            screens.add(it.label)
                         },
                         onFabClick = {
-                            screens.add("Pedido")
                         }) {
-                        when (currentScreen) {
-                            "Destaques" -> HighlightsListScreen(
-                                products = sampleProducts,
-                                onOrderClick = {
-                                    screens.add("Pedido")
-                                },
-                                onProductClick = {
-                                    screens.add("DetalhesProduto")
-                                }
-                            )
-                            "Menu" -> MenuListScreen(
-                                products = sampleProducts
-                            )
-                            "Bebidas" -> DrinksListScreen(
-                                products = sampleProducts + sampleProducts
-                            )
-                            "DetalhesProduto" -> ProductDetailsScreen(
-                                product = sampleProductWithImage
-                            )
-                            "Pedido" -> CheckoutScreen(products = sampleProducts)
-                        }
+                        // TODO implementar o nav host
                     }
                 }
             }
