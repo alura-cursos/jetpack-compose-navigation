@@ -1,7 +1,6 @@
 package br.com.alura.panucci
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -13,8 +12,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.sampledata.bottomAppBarItems
+import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.screens.*
@@ -26,25 +28,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            Log.i("MainActivity", "onCreate: navController $navController")
-            val currentScreen = ""
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var selectedItem by remember(currentScreen) {
-                        val item = bottomAppBarItems.find { currentScreen == it.label }
+                    var selectedItem by remember {
+                        val item = bottomAppBarItems.first()
                         mutableStateOf(item)
                     }
                     PanucciApp(
-                        bottomAppBarItemSelected = selectedItem ?: bottomAppBarItems.first(),
+                        bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
                         },
                         onFabClick = {
                         }) {
-                        // TODO implementar o nav host
+                        NavHost(
+                            navController = navController,
+                            startDestination = "home"
+                        ) {
+                            composable("home") {
+                                HighlightsListScreen(products = sampleProducts)
+                            }
+                            composable("menu") {
+                                MenuListScreen(products = sampleProducts)
+                            }
+                        }
                     }
                 }
             }
