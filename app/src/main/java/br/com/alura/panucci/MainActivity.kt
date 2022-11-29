@@ -21,6 +21,7 @@ import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.screens.*
 import br.com.alura.panucci.ui.theme.PanucciTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
@@ -28,6 +29,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            LaunchedEffect(Unit) {
+                delay(3000L)
+                navController.navigate("menu")
+            }
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
