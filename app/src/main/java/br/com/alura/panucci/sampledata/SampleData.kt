@@ -38,14 +38,17 @@ val sampleProducts = List(10) { index ->
 val bottomAppBarItems = listOf(
     BottomAppBarItem(
         label = "Destaques",
-        icon = Icons.Filled.AutoAwesome
+        icon = Icons.Filled.AutoAwesome,
+        route = "highlight"
     ),
     BottomAppBarItem(
         label = "Menu",
-        icon = Icons.Filled.RestaurantMenu
+        icon = Icons.Filled.RestaurantMenu,
+        route = "menu"
     ),
     BottomAppBarItem(
         label = "Bebidas",
-        icon = Icons.Outlined.LocalBar
+        icon = Icons.Outlined.LocalBar,
+        route = "drinks"
     ),
 )
