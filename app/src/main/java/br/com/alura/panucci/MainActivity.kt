@@ -1,6 +1,7 @@
 package br.com.alura.panucci
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -29,6 +31,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            LaunchedEffect(Unit) {
+                navController.addOnDestinationChangedListener{ _, _, _ ->
+                    val routes = navController.backQueue.map {
+                        it.destination.route
+                    }
+                    Log.i("MainActivity", "onCreate: back stack - $routes")
+                }
+            }
             val backStackEntryState by navController.currentBackStackEntryAsState()
             val currentDestination = backStackEntryState?.destination
             PanucciTheme {
