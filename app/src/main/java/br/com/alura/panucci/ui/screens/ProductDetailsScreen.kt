@@ -1,13 +1,11 @@
 package br.com.alura.panucci.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +20,8 @@ import coil.compose.AsyncImage
 @Composable
 fun ProductDetailsScreen(
     product: Product,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToCheckout: () -> Unit = {}
 ) {
     Column(
         modifier
@@ -50,7 +49,7 @@ fun ProductDetailsScreen(
             Text(product.price.toPlainString(), fontSize = 18.sp)
             Text(product.description)
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onNavigateToCheckout() },
                 Modifier
                     .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)

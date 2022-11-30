@@ -23,8 +23,8 @@ fun HighlightsListScreen(
     modifier: Modifier = Modifier,
     title: String = "Destaques do dia",
     products: List<Product> = emptyList(),
-    onOrderClick: () -> Unit = {},
-    onProductClick: () -> Unit = {}
+    onNavigateToCheckout: () -> Unit = {},
+    onNavigateToDetails: () -> Unit = {}
 ) {
     Column(
         modifier
@@ -51,9 +51,9 @@ fun HighlightsListScreen(
                 HighlightProductCard(
                     product = p,
                     Modifier.clickable {
-                        onProductClick()
+                        onNavigateToDetails()
                     },
-                    onOrderClick = onOrderClick
+                    onOrderClick = onNavigateToCheckout
                 )
             }
         }
