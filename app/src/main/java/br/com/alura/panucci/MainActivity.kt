@@ -87,8 +87,10 @@ class MainActivity : ComponentActivity() {
                             composable(AppDestination.Highlight.route) {
                                 HighlightsListScreen(
                                     products = sampleProducts,
-                                    onNavigateToDetails = {
-                                        navController.navigate("${AppDestination.ProductDetails.route}/alex")
+                                    onNavigateToDetails = { product ->
+                                        navController.navigate(
+                                            "${AppDestination.ProductDetails.route}/${product.id}"
+                                        )
                                     },
                                     onNavigateToCheckout = {
                                         navController.navigate(AppDestination.Checkout.route)
@@ -98,16 +100,20 @@ class MainActivity : ComponentActivity() {
                             composable(AppDestination.Menu.route) {
                                 MenuListScreen(
                                     products = sampleProducts,
-                                    onNavigateToDetails = {
-                                        navController.navigate(AppDestination.ProductDetails.route)
+                                    onNavigateToDetails = { product ->
+                                        navController.navigate(
+                                            "${AppDestination.ProductDetails.route}/${product.id}"
+                                        )
                                     },
                                 )
                             }
                             composable(AppDestination.Drinks.route) {
                                 DrinksListScreen(
                                     products = sampleProducts,
-                                    onNavigateToDetails = {
-                                        navController.navigate(AppDestination.ProductDetails.route)
+                                    onNavigateToDetails = { product ->
+                                        navController.navigate(
+                                            "${AppDestination.ProductDetails.route}/${product.id}"
+                                        )
                                     },
                                 )
                             }
@@ -115,13 +121,17 @@ class MainActivity : ComponentActivity() {
                                 "${AppDestination.ProductDetails.route}/{productId}"
                             ) { backStackEntry ->
                                 val id = backStackEntry.arguments?.getString("productId")
-                                Log.i("MainActivity", "onCreate: productId - $id")
-                                ProductDetailsScreen(
-                                    product = sampleProducts.random(),
-                                    onNavigateToCheckout = {
-                                        navController.navigate(AppDestination.Checkout.route)
-                                    },
-                                )
+                                sampleProducts.find {
+                                    it.id == id
+                                }?.let { product ->
+                                    ProductDetailsScreen(
+                                        product = product,
+                                        onNavigateToCheckout = {
+                                            navController.navigate(AppDestination.Checkout.route)
+                                        },
+                                    )
+                                }
+
                             }
                             composable(AppDestination.Checkout.route) {
                                 CheckoutScreen(products = sampleProducts)
@@ -166,7 +176,7 @@ fun PanucciApp(
             }
         },
         floatingActionButton = {
-            if(isShowFab) {
+            if (isShowFab) {
                 FloatingActionButton(
                     onClick = onFabClick
                 ) {

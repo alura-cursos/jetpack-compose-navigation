@@ -27,7 +27,7 @@ fun DrinksListScreen(
     title: String = "Bebidas",
     products: List<Product> = emptyList(),
     columns: Int = 2,
-    onNavigateToDetails: () -> Unit = {}
+    onNavigateToDetails: (Product) -> Unit = {}
 ) {
     Column(
         modifier
@@ -55,7 +55,7 @@ fun DrinksListScreen(
                 DrinkProductCard(
                     product = p,
                     Modifier.clickable {
-                        onNavigateToDetails()
+                        onNavigateToDetails(p)
                     }
                 )
             }
