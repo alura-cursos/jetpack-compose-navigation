@@ -1,34 +1,53 @@
 ![thumbnail-Jetpack Compose](https://user-images.githubusercontent.com/8989346/190405552-1c63783b-2c38-4764-b758-12c2d5f52004.png)
-  
-# Nome do projeto - WIP
 
-## 🛠 Projeto em desenvolvimento
+## 🔨 Funcionalidades do projeto
 
-<!-- ## 🔨 Funcionalidades do projeto
+O App Panucci permite visualizar os produtos em 3 principais categorias:
 
-Indique quais são as funcionalidades e comportamentos do App
+- Destaques do dia: melhores produtos ou mais pedidos
+- Menu: todos os produtos
+- Bebidas: todas as bebidas
 
-Se possível, apresente um exemplo visual do projeto, seja gif, imagens ou vídeo, abaixo segue um exemplo:
+Também, é possível acessar os detalhes do produto ao clicar em um dos produtos a partir da tela de destaques, menu ou bebidas. Por fim, é possível acessar a tela de pedido ao clicar no botão de pedir ou no FAB.
 
-![](https://github.com/alura-cursos/android-com-kotlin-personalizando-ui/raw/master/img/amostra.gif)
+> O App não possui lógica de cálculo ou cadastro, é apenas uma implementação focada no visual e interação de navegação.
+
+![App Panucci em execução](https://user-images.githubusercontent.com/8989346/205920654-2d7c88d7-4baa-462e-8aba-fc037b569f58.gif)
 
 ## ✔️ Técnicas e tecnologias utilizadas
 
-**Faça uma lista de tecnologias e técnicas utilizadas (a justificativa e descrição são opcionais)**:
+Para implementar o App foram utilizadas as seguintes funcionalidades e tecnologias:
 
-- `Funcionalidade 1`: descrição da funcionalidade 1
-- `Funcionalidade 2`: descrição da funcionalidade 2
-  - `Funcionalidade 2a`: descrição da funcionalidade 2a relacionada à funcionalidade 2
-- `Funcionalidade 3`: descrição da funcionalidade 3
+- Jetpack Compose
+- Material Design 3
+  - `Scaffold`
+  - `NavigationBar` 
+  - `Floating Action Button`
+  - `Center Aligned Top App Bar`
+  - `Card`
+- Lazy Layout
+- Slot API
+- Navigation para Compose
+  - `NavController`
+  - `NavHost`
+  - Grafo de navegação
+  - Integração com componentes visuais
+- `LaunchedEffect`
+- Sealed class
 
 ## 📁 Acesso ao projeto
 
-**Indique como é possível baixar ou acessar o código fonte do projeto, seja projeto inicial ou final**
+Você pode [acessar o código fonte do projeto](https://github.com/alura-cursos/jetpack-compose-navigation/tree/aula-5) ou [baixá-lo](https://github.com/alura-cursos/jetpack-compose-navigation/archive/refs/heads/aula-5.zip).
 
 ## 🛠️ Abrir e rodar o projeto
 
-**Apresente as instruções necessárias para abrir e executar o projeto**
+Após baixar o projeto, você pode abrir com o Android Studio. Para isso, na tela de launcher clique em:
 
-## 📚 Mais informações do curso
+Open an Existing Project (ou alguma opção similar)
+Procure o local onde o projeto está e o selecione (Caso o projeto seja baixado via zip, é necessário extraí-lo antes de procurá-lo)
+Por fim clique em OK
+O Android Studio deve executar algumas tasks do Gradle para configurar o projeto, aguarde até finalizar. Ao finalizar as tasks, você pode executar o App 🏆
+
+<!-- ## 📚 Mais informações do curso
 
 **Faça um CTA (_call to action_) para o curso do projeto**
