@@ -1,5 +1,9 @@
 package br.com.alura.panucci.ui.components
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.RestaurantMenu
+import androidx.compose.material.icons.outlined.LocalBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,11 +16,32 @@ import br.com.alura.panucci.navigation.AppDestination
 import br.com.alura.panucci.navigation.bottomAppBarItems
 import br.com.alura.panucci.ui.theme.PanucciTheme
 
-class BottomAppBarItem(
+sealed class BottomAppBarItem(
     val label: String,
     val icon: ImageVector,
     val destination: AppDestination
-)
+) {
+
+    object Highlight : BottomAppBarItem(
+        label = "Destaques",
+        icon = Icons.Filled.AutoAwesome,
+        destination = AppDestination.Highlight
+    )
+
+    object Menu : BottomAppBarItem(
+        label = "Menu",
+        icon = Icons.Filled.RestaurantMenu,
+        destination = AppDestination.Menu
+    )
+
+    object Drinks : BottomAppBarItem(
+        label = "Bebidas",
+        icon = Icons.Outlined.LocalBar,
+        destination = AppDestination.Drinks
+    )
+
+}
+
 
 @Composable
 fun PanucciBottomAppBar(

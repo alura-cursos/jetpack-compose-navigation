@@ -17,9 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.alura.panucci.navigation.AppDestination
-import br.com.alura.panucci.navigation.PanucciNavHost
-import br.com.alura.panucci.navigation.bottomAppBarItems
+import br.com.alura.panucci.navigation.*
 import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
@@ -48,21 +46,21 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val selectedItem by remember(currentDestination) {
-                        val item = currentDestination?.let { destination ->
-                            bottomAppBarItems.find {
-                                it.destination.route == destination.route
-                            }
-                        } ?: bottomAppBarItems.first()
+                        val item = when (currentDestination?.route) {
+                            highlightsRoute -> BottomAppBarItem.Highlight
+                            menuRoute -> BottomAppBarItem.Menu
+                            drinksRoute -> BottomAppBarItem.Drinks
+                            else -> BottomAppBarItem.Highlight
+                        }
                         mutableStateOf(item)
                     }
-                    val containsInBottomAppBarItems = currentDestination?.let { destination ->
-                        bottomAppBarItems.find {
-                            it.destination.route == destination.route
-                        }
-                    } != null
+                    val containsInBottomAppBarItems = when (currentDestination?.route) {
+                        highlightsRoute, menuRoute, drinksRoute -> true
+                        else -> false
+                    }
                     val isShowFab = when (currentDestination?.route) {
-                        AppDestination.Menu.route,
-                        AppDestination.Drinks.route -> true
+                        menuRoute,
+                        drinksRoute -> true
                         else -> false
                     }
                     PanucciApp(
