@@ -13,15 +13,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
 import br.com.alura.panucci.navigation.*
-import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.screens.*
@@ -69,25 +63,7 @@ class MainActivity : ComponentActivity() {
                     PanucciApp(
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
-                            val (route: String, navigate) = when (it) {
-                                BottomAppBarItem.Drinks -> Pair(
-                                    drinksRoute,
-                                    navController::navigateToDrinks
-                                )
-                                BottomAppBarItem.Highlight -> Pair(
-                                    highlightsRoute,
-                                    navController::navigateToHighlights
-                                )
-                                BottomAppBarItem.Menu -> Pair(
-                                    menuRoute,
-                                    navController::navigateToMenu
-                                )
-                            }
-                            val navOptions = navOptions {
-                                launchSingleTop = true
-                                popUpTo(route)
-                            }
-                            navigate(navOptions)
+                            navController.navigateToSingleTopWithPopUpToRoute(it)
                         },
                         onFabClick = {
                             navController.navigate(AppDestination.Checkout.route)
@@ -102,7 +78,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
