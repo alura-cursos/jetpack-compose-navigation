@@ -12,6 +12,8 @@ sealed class AppDestination(val route: String) {
     object Drinks : AppDestination("drinks")
     object ProductDetails : AppDestination("productDetails")
     object Checkout : AppDestination("checkout")
+    object Authentication : AppDestination("authentication")
+    object UserRegistration : AppDestination("userRegistration")
 }
 
 val bottomAppBarItems = listOf(
